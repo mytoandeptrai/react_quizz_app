@@ -31,7 +31,7 @@ const Question = ({
   const handleQuit = () => {
     setCurrQues(0);
     setQuestions();
-    history.push("/");
+    history.push("/home");
   };
   const handleNext = () => {
     if (currQues > 8) {

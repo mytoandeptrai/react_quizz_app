@@ -5,12 +5,11 @@ import ErrorMessage from "../../components/ErrorMessage";
 import Categories from "../../Data/Categories";
 import quiz from "./../../assets/quiz.svg";
 import "./style.css";
-const Home = ({ name, setName, fetchQuestions }) => {
+const Home = ({ name, setName, fetchQuestions, handleLogOut }) => {
   const history = useHistory();
   const [category, setCategory] = useState("");
   const [difficulty, setDifficulty] = useState("");
   const [error, setError] = useState(false);
-
   const handleSubmit = () => {
     if (!category || !difficulty || !name) {
       setError(true);
@@ -20,6 +19,10 @@ const Home = ({ name, setName, fetchQuestions }) => {
       fetchQuestions(category, difficulty);
       history.push("/quizz");
     }
+  };
+  const logOut = () => {
+    handleLogOut();
+    history.push("/");
   };
   return (
     <div className="content">
@@ -77,6 +80,14 @@ const Home = ({ name, setName, fetchQuestions }) => {
             onClick={handleSubmit}
           >
             Start Quizz
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            size="large"
+            onClick={logOut}
+          >
+            Logout
           </Button>
         </div>
       </div>

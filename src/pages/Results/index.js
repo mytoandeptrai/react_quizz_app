@@ -18,7 +18,7 @@ const Result = ({ name, score }) => {
         color="secondary"
         size="large"
         style={{ alignSelf: "center", marginTop: 20 }}
-        onClick={() => history.push("/")}
+        onClick={() => history.push("/home")}
       >
         Go to homepage
       </Button>
