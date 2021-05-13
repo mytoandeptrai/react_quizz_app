@@ -5,12 +5,12 @@ const WithAuth = (props) => {
   const { currentUser } = props;
   const history = useHistory();
   const email = currentUser && currentUser.email;
-  console.log(email);
+  const isChecking = localStorage.getItem("isLogin") || false;
   useEffect(() => {
-    if (!email) {
+    if (!isChecking) {
       history.push("/");
     }
-  }, [email]);
+  }, [isChecking]);
   return <>{props.children}</>;
 };
 

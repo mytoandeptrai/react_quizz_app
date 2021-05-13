@@ -26,6 +26,7 @@ const SignUp = () => {
       .createUserWithEmailAndPassword(emailValue, passwordValue)
       .then(() => {
         history.push("/home");
+        localStorage.setItem("isLogin", "true");
       })
       .catch((error) => {
         setErrorMessage(error.message);

@@ -14,18 +14,21 @@ const SignIn = () => {
     setEmail("");
     setPassword("");
   };
+
   const handleSignInWithFirebase = (emailValue, passwordValue) => {
     fire
       .auth()
       .signInWithEmailAndPassword(emailValue, passwordValue)
       .then(() => {
         history.push("/home");
+        localStorage.setItem("isLogin", "true");
       })
       .catch((error) => {
         setErrorMessage(error.message);
         resetForm();
       });
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!email || !password) return;

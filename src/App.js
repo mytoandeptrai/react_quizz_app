@@ -1,6 +1,6 @@
 import axios from "axios";
-import { useEffect, useHistory, useState } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { BrowserRouter, Route, Switch, useHistory } from "react-router-dom";
 import "./App.css";
 import ques1 from "./assets/ques1.png";
 import Footer from "./components/Footer";
@@ -14,11 +14,13 @@ import Quizz from "./pages/Quizz";
 import Recovery from "./pages/Recovery";
 import Registration from "./pages/Registration";
 import Result from "./pages/Results";
+
 function App() {
   const [currentUser, setCurrentUser] = useState("");
   const [name, setName] = useState("");
   const [questions, setQuestions] = useState();
   const [score, setScore] = useState(0);
+  const urlLink = window.location.href;
   const fetchQuestions = async (category = "", difficulty = "") => {
     const { data } = await axios.get(
       `https://opentdb.com/api.php?amount=10${
@@ -30,13 +32,13 @@ function App() {
 
   const handleLogOut = () => {
     fire.auth().signOut();
+    localStorage.removeItem("isLogin");
   };
   // check user exists
   const authListener = () => {
     fire.auth().onAuthStateChanged((user) => {
       if (user) {
         console.log(user);
-        // clear everytime we have user
         setCurrentUser(user);
       } else {
         setCurrentUser("");
@@ -51,7 +53,12 @@ function App() {
     };
   }, []);
 
-  console.log(currentUser); // khogn co user //
+  useEffect(() => {
+    const isChecking = localStorage.getItem("isLogin") || "";
+    if (isChecking !== "true" && urlLink !== "http://localhost:3000/") {
+      window.location.href = "http://localhost:3000/";
+    }
+  });
 
   return (
     <BrowserRouter>
@@ -74,14 +81,15 @@ function App() {
             </MainLayout>
           </Route>
           <Route path="/home">
+            {/* <WithAuth> */}
             <Home
               handleLogOut={handleLogOut}
               name={name}
               setName={setName}
               fetchQuestions={fetchQuestions}
             />
+            {/* </WithAuth> */}
           </Route>
-
           <Route path="/quizz">
             <Quizz
               name={name}
