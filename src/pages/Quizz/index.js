@@ -16,6 +16,7 @@ const Quizz = ({ name, score, questions, setScore, setQuestions }) => {
     );
   }, [questions, currQues]);
   console.log(options);
+  //handle Random options
   const handleShuffle = (optionss) => {
     return optionss.sort(() => Math.random() - 0.5);
   };
@@ -28,7 +29,6 @@ const Quizz = ({ name, score, questions, setScore, setQuestions }) => {
           <div className="quizInfo">
             <span>{questions[currQues].category}</span>
             <span>
-              {/* {questions[currQues].difficulty} */}
               Score : {score}
             </span>
           </div>

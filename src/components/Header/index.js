@@ -4,9 +4,7 @@ import "./style.css";
 const Header = () => {
   return (
     <div className="header">
-      <Link className="title" to="/">
-        Welcome to our quizz app
-      </Link>
+      <span className="title">Welcome to our quiz app</span>
       <hr className="divider" />
     </div>
   );

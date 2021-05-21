@@ -33,6 +33,7 @@ const Question = ({
     setQuestions();
     history.push("/home");
   };
+  
   const handleNext = () => {
     if (currQues > 8) {
       history.push("/result");

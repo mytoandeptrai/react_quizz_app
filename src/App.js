@@ -21,6 +21,7 @@ function App() {
   const [questions, setQuestions] = useState();
   const [score, setScore] = useState(0);
   const urlLink = window.location.href;
+
   const fetchQuestions = async (category = "", difficulty = "") => {
     const { data } = await axios.get(
       `https://opentdb.com/api.php?amount=10${
@@ -81,14 +82,12 @@ function App() {
             </MainLayout>
           </Route>
           <Route path="/home">
-            {/* <WithAuth> */}
             <Home
               handleLogOut={handleLogOut}
               name={name}
               setName={setName}
               fetchQuestions={fetchQuestions}
             />
-            {/* </WithAuth> */}
           </Route>
           <Route path="/quizz">
             <Quizz
